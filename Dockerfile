@@ -36,6 +36,9 @@ ENV PORT_PROMISCUOUS NO
 COPY vsftpd.conf /etc/vsftpd/
 COPY vsftpd_virtual /etc/pam.d/
 COPY run-vsftpd.sh /usr/sbin/
+RUN mkdir -p /etc/ssl/private
+COPY makecert.sh openssl.conf /etc/ssl/private/
+RUN bash /etc/ssl/private/makecert.sh
 
 RUN chmod +x /usr/sbin/run-vsftpd.sh
 RUN mkdir -p /home/vsftpd/
